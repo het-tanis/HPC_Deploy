@@ -1,0 +1,9 @@
+- hosts: all
+  gather_facts: true
+  vars:
+  tasks:
+
+  roles:
+  - { role: packages_install, when: action == "install" }
+  - { role: packages_update, when: action == "update" }
+  
