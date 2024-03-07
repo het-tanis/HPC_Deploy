@@ -1,0 +1,20 @@
+---
+# tasks file for dungeon setup
+
+# Set the IP address based on the mac
+## Get Mac
+
+- name: Get mac address
+  shell: "ip addr | grep -v global | grep -A1 eth0 | tail -1 | awk '{$print $2}' | awk -F: '{print $NF}'"
+  register: mac_addr
+
+# Set the Hostname based on the mac
+## Build some type of table for hostnames/ips
+
+
+#Set name in promtail for dungeon/hostname
+#Restart promtail 
+
+#Build out software
+
+#- name: 
