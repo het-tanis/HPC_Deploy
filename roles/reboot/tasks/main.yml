@@ -12,7 +12,7 @@
   failed_when: false
   when: ansible_os_family == 'Rocky' or ansible_os_family == 'RHEL'
 
-- name Set reboot_required fact
+- name: Set reboot_required fact
   set_fact:
     reboot_required: true
   when: reboot_check.rc == 1

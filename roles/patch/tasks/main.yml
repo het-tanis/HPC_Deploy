@@ -4,7 +4,7 @@
     state: latest
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-- Name install need-restart
+- name: install need-restart
   apt:
     name: needrestart
     state: present
