@@ -1,0 +1,16 @@
+- name: Create the facts directory in case it isn't there
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
+
+- name: Push over the db_patching.fact
+  copy:
+    src: files/deb_patching.fact
+    dest: "/etc/ansible/facts.d/patching.fact"
+  when: '"db" in app'
+
+- name: Push over the web_patching.fact
+  copy:
+    src: files/web_patching.fact
+    dest: "/etc/ansible/facts.d/patching.fact"
+  when: '"web" in app'

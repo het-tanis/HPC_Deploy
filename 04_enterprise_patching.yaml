@@ -1,0 +1,12 @@
+- hosts: all
+  gather_facts: true
+  vars:
+  tasks:
+
+  roles:
+  - precheck
+  - patch
+  - { role: fact_push, when: ansible_local.patching.rebooting == "true" }
+  - server_validation
+  - app_validation
+  - { role: report, when: report | default(false) == "true" }

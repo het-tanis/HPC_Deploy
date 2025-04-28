@@ -1,0 +1,8 @@
+- name: Major Distribution
+  group_by:
+    key: "{{ansible_distribution}}{{ ansible_distribution_major_version }}"
+
+- name: Checking Rebooting flag
+  group_by:
+    key: rebooting
+  when: '"true" in ansible_local.patching.rebooting'
