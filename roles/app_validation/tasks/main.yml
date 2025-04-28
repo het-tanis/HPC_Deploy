@@ -1,0 +1,11 @@
+- name: Check apache if web server is running
+  ansible.builtin.command: ps -ef | grep httpd
+  register: apache_status
+  changed_when: false
+  when: ansible_local.patching.webserver == 'true'
+
+- name: check database if database server is running
+  ansible.builtin.command: ps -ef | grep mysqld
+  register: mysql_status
+  changed_when: false
+  when: ansible_local.patching.database == 'true'

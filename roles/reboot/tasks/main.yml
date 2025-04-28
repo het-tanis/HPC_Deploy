@@ -1,0 +1,27 @@
+- name: Check for reboot requirement
+  command: needrestart
+  register: reboot_check
+  changed_when: false
+  failed_when: false
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
+
+- name: Check for reboot requirement on Rocky or RHEL
+  command: needs-restarting -r
+  register: reboot_check
+  changed_when: false
+  failed_when: false
+  when: ansible_os_family == 'Rocky' or ansible_os_family == 'RHEL'
+
+- name Set reboot_required fact
+  set_fact:
+    reboot_required: true
+  when: reboot_check.rc == 1
+
+- name: Reboot if needed
+  reboot:
+    msg: "Rebooting the system to apply changes"
+    connect_timeout: 5
+    reboot_timeout: 600
+    test_command: whoami
+  when: ansible_facts['reboot_required'] | bool and ansible_local.patching.rebooting  == 'true'
+  register: reboot_result

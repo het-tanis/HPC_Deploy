@@ -1,0 +1,4 @@
+- name: Check server uptime
+  ansible.builtin.command: uptime
+  register: uptime_result
+  changed_when: false
