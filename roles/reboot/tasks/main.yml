@@ -1,5 +1,5 @@
 - name: Check for reboot requirement
-  command: needrestart
+  command: needrestart -b
   register: reboot_check
   changed_when: false
   failed_when: false
