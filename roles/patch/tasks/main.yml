@@ -4,8 +4,20 @@
     state: latest
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
+- Name install need-restart
+  apt:
+    name: needrestart
+    state: present
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
 - name: Upgrade all packages to the latest version on Rocky or RHEL
   dnf:
     name: "*"
     state: latest
+  when: ansible_distribution == "Rocky" or ansible_distribution == "RHEL"
+
+- name: install needsrestart
+  dnf:
+    name: yum-utils
+    state: present
   when: ansible_distribution == "Rocky" or ansible_distribution == "RHEL"
