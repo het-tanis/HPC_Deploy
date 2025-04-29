@@ -5,9 +5,9 @@
 
   roles:
   - precheck
-  - { role: fact_push, when: ansible_local.patching.rebooting == "true" }
+  - fact_push
   - patch
-  - reboot
+  - { role: reboot, when: ansible_local.patching.rebooting == "true" }
   - server_validation
   - app_validation
   - { role: report, when: report | default(false) == "true" }
