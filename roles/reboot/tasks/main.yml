@@ -15,7 +15,7 @@
 - name: Set reboot_required fact
   set_fact:
     reboot_required: true
-  when: reboot_check.rc == 1
+  when: reboot_check.rc | default(0) == 1
 
 - name: Reboot if needed
   reboot:
@@ -23,5 +23,5 @@
     connect_timeout: 5
     reboot_timeout: 600
     test_command: whoami
-  when: ansible_facts['reboot_required'] | bool and ansible_local.patching.rebooting  == 'true'
+  when: reboot_required | default(false) == 'true' and ansible_local.patching.rebooting  == 'true'
   register: reboot_result
